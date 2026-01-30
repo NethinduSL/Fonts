@@ -27,6 +27,14 @@ body {
     height: 100vh;
   }
 }
+body.light-mode {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+body.light-mode .glass {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 .glass {
   background: rgba(255, 255, 255, 0.05);
@@ -349,8 +357,8 @@ textarea:focus {
 }
 
 .dropdown-item img {
-  width: 40px;
-  height: 24px;
+  width: 20%;
+  max-height: 40px;
   object-fit: contain;
   background: white;
   border-radius: 4px;
@@ -589,7 +597,7 @@ input[type="text"]:focus {
   
   <!-- Header Section -->
   <div class="header animate-fade-in">
-    <h2>SFIG By E box❤️    </h2>
+    <h2>SINFIG By E box❤️    </h2>
   </div>
 
   <!-- Main Layout -->
@@ -632,15 +640,18 @@ input[type="text"]:focus {
         </div>
       </div>
 
-      <!-- Size and Color -->
-      <div class="grid-2">
-        <!-- Size Slider -->
-        <div>
-          <label class="label">
-            <i class="fas fa-text-height" style="margin-right: 4px;"></i>Size: <span id="fontSizeLabel" class="text-blue-400">200</span>
-          </label>
-          <input type="range" id="fontSize" min="200" max="3000" value="200">
-        </div>
+<!-- Size and Color -->
+<div class="grid-2">
+  <!-- Size Slider -->
+  <div>
+    <label class="label">
+      <i class="fas fa-text-height" style="margin-right: 4px;"></i>Size
+    </label>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <input type="range" id="fontSize" min="200" max="3000" value="200" style="flex: 1;">
+      <input type="number" id="fontSizeInput" value="200" min="200" max="3000" style="width: 60px; padding: 4px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: white; font-size: 12px;">
+    </div>
+  </div>
 
         <!-- Text Color -->
         <div>
@@ -739,139 +750,78 @@ input[type="text"]:focus {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   
-  let isDarkMode = true;
-  
-  const modeToggle = document.getElementById('modeToggle');
-  const modeIcon = document.getElementById('modeIcon');
-  function toggleMode() {
-    isDarkMode = !isDarkMode;
-    
-    if (isDarkMode) {
-      // Dark mode
-      document.body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
-      document.body.classList.remove('light-mode');
-      modeIcon.className = 'fas fa-sun text-yellow-300';
-      modeIcon.style.fontSize = '14px';
-      modeIcon.style.color = '';
-      
-      // Update all text elements to white
-      document.querySelectorAll('.label, .nav-title, .header h2, .preview-title').forEach(el => {
-        el.style.color = 'white';
-      });
-      
-      // Update textareas and inputs
-      document.querySelectorAll('textarea, input[type="text"], .select-btn, .dropdown-item span').forEach(el => {
-        el.style.color = 'white';
-      });
-      
-      // Update textarea borders
-      document.querySelectorAll('textarea').forEach(el => {
-        el.style.border = '2px solid rgba(255, 255, 255, 0.3)';
-        el.style.background = 'rgba(255, 255, 255, 0.1)';
-      });
-      
-      // Update input borders
-      document.querySelectorAll('input[type="text"]').forEach(el => {
-        el.style.border = '2px solid rgba(255, 255, 255, 0.3)';
-        el.style.background = 'rgba(255, 255, 255, 0.1)';
-      });
-      
-      // Update select button borders
-      document.querySelectorAll('.select-btn').forEach(el => {
-        el.style.border = '2px solid rgba(255, 255, 255, 0.3)';
-        el.style.background = 'rgba(255, 255, 255, 0.1)';
-      });
-      
-      // Update style and align button borders and icons
-      document.querySelectorAll('.style-btn, .align-btn').forEach(el => {
-        el.style.border = '2px solid rgba(255, 255, 255, 0.3)';
-        el.style.background = 'rgba(255, 255, 255, 0.1)';
-        const icon = el.querySelector('i');
-        if (icon) icon.style.color = 'white';
-      });
-      
-      // Update glass panels
-      document.querySelectorAll('.glass').forEach(el => {
-        el.style.background = 'rgba(255, 255, 255, 0.05)';
-        el.style.border = '1px solid rgba(255, 255, 255, 0.1)';
-      });
-      
-      // Update dropdown
-      const dropdown = document.getElementById('fontDropdown');
-      if (dropdown) {
-        dropdown.style.background = '#1f2937';
-        dropdown.style.border = '2px solid rgba(255, 255, 255, 0.3)';
-      }
-      
-    } else {
-      // Light mode
-      document.body.style.background = 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)';
-      document.body.classList.add('light-mode');
-      modeIcon.className = 'fas fa-moon';
-      modeIcon.style.color = '#374151';
-      modeIcon.style.fontSize = '14px';
-      
-      // Update all text elements to dark
-      document.querySelectorAll('.label, .nav-title, .header h2, .preview-title').forEach(el => {
-        el.style.color = '#1f2937';
-      });
-      
-      // Update textareas and inputs
-      document.querySelectorAll('textarea, input[type="text"], .select-btn, .dropdown-item span').forEach(el => {
-        el.style.color = '#1f2937';
-      });
-      
-      // Update textarea borders
-      document.querySelectorAll('textarea').forEach(el => {
-        el.style.border = '2px solid rgba(0, 0, 0, 0.2)';
-        el.style.background = 'rgba(255, 255, 255, 0.8)';
-      });
-      
-      // Update input borders
-      document.querySelectorAll('input[type="text"]').forEach(el => {
-        el.style.border = '2px solid rgba(0, 0, 0, 0.2)';
-        el.style.background = 'rgba(255, 255, 255, 0.8)';
-      });
-      
-      // Update select button borders
-      document.querySelectorAll('.select-btn').forEach(el => {
-        el.style.border = '2px solid rgba(0, 0, 0, 0.2)';
-        el.style.background = 'rgba(255, 255, 255, 0.8)';
-      });
-      
-      // Update style and align button borders and icons
-      document.querySelectorAll('.style-btn, .align-btn').forEach(el => {
-        el.style.border = '2px solid rgba(0, 0, 0, 0.2)';
-        el.style.background = 'rgba(255, 255, 255, 0.8)';
-        const icon = el.querySelector('i');
-        if (icon) icon.style.color = '#1f2937';
-      });
-      
-      // Update glass panels to light mode
-      document.querySelectorAll('.glass').forEach(el => {
-        el.style.background = 'rgba(255, 255, 255, 0.95)';
-        el.style.border = '1px solid rgba(0, 0, 0, 0.05)';
-      });
-      
-      // Update dropdown
-      const dropdown = document.getElementById('fontDropdown');
-      if (dropdown) {
-        dropdown.style.background = '#ffffff';
-        dropdown.style.border = '2px solid rgba(0, 0, 0, 0.2)';
-      }
-    }
-  
-  }
-  
-  modeToggle.addEventListener('click', toggleMode);
-  
-  // Font Size Slider
-  const fontSizeSlider = document.getElementById('fontSize');
-  const fontSizeLabel = document.getElementById('fontSizeLabel');
-  fontSizeSlider.addEventListener('input', () => {
-    fontSizeLabel.textContent = fontSizeSlider.value;
+let isDarkMode = true;
+const modeToggle = document.getElementById('modeToggle');
+const modeIcon = document.getElementById('modeIcon');
+
+function toggleMode() {
+  isDarkMode = !isDarkMode;
+  document.body.classList.toggle('light-mode', !isDarkMode);
+  modeIcon.className = isDarkMode ? 'fas fa-sun text-yellow-300' : 'fas fa-moon';
+  modeIcon.style.color = isDarkMode ? '' : '#374151';
+  updateStyles();
+}
+
+function updateStyles() {
+  const isLight = document.body.classList.contains('light-mode');
+  const textColor = isLight ? '#1f2937' : 'white';
+  const bgColor = isLight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(30, 41, 59, 0.8)'; // updated bgColor
+  const borderColor = isLight ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.3)';
+  const glassBg = isLight ? 'rgba(255, 255, 255, 0.95)' : 'rgba(15, 23, 42, 0.95)'; // updated glassBg
+  const glassBorder = isLight ? '1px solid rgba(0, 0, 0, 0.05)' : '1px solid rgba(255, 255, 255, 0.1)';
+  const dropdownBg = isLight ? '#ffffff' : '#1f2937';
+  const dropdownBorder = isLight ? '2px solid rgba(0, 0, 0, 0.2)' : '2px solid rgba(255, 255, 255, 0.3)';
+  const sliderBg = isLight ? '#d1d5db' : '#4b5563'; // added sliderBg
+
+  document.querySelectorAll('.label, .nav-title, .header h2, .preview-title').forEach(el => {
+    el.style.color = textColor;
   });
+
+  document.querySelectorAll('textarea, input[type="text"], .select-btn, .dropdown-item span').forEach(el => {
+    el.style.color = textColor;
+    el.style.background = bgColor;
+    el.style.border = borderColor;
+  });
+
+  document.querySelectorAll('input[type="range"]').forEach(el => {
+    el.style.background = sliderBg;
+  });
+
+  document.querySelectorAll('.style-btn, .align-btn').forEach(el => {
+    el.style.background = bgColor;
+    el.style.border = borderColor;
+    const icon = el.querySelector('i');
+    if (icon) icon.style.color = textColor;
+  });
+
+  document.querySelectorAll('.glass').forEach(el => {
+    el.style.background = glassBg;
+    el.style.border = glassBorder;
+  });
+
+  const dropdown = document.getElementById('fontDropdown');
+  if (dropdown) {
+    dropdown.style.background = dropdownBg;
+    dropdown.style.border = dropdownBorder;
+  }
+}
+modeToggle.addEventListener('click', toggleMode);
+
+
   
+  const fontSizeSlider = document.getElementById('fontSize');
+const fontSizeInput = document.getElementById('fontSizeInput');
+
+fontSizeSlider.addEventListener('input', () => {
+  fontSizeInput.value = fontSizeSlider.value;
+});
+
+fontSizeInput.addEventListener('input', () => {
+  const value = parseInt(fontSizeInput.value);
+  if (!isNaN(value) && value >= 200 && value <= 3000) {
+    fontSizeSlider.value = value;
+  }
+});
   // Color Picker
   const textColorPicker = document.getElementById('textColor');
   const colorHexInput = document.getElementById('colorHex');
@@ -958,7 +908,7 @@ document.addEventListener('DOMContentLoaded', function() {
         previewImg.loading = 'lazy';
         previewImg.alt = font;
         
-        fetch(`https://bit-x-apis.vercel.app/textimg?q=exi&font=${encodeURIComponent(font)}&size=30&align=center&color=%23000000&s=`)
+        fetch(`https://bit-x-apis.vercel.app/textimg?q=fïl ,iaikhs&font=${encodeURIComponent(font)}&size=30&align=center&color=%23000000&s=`)
           .then(res => res.json())
           .then(previewData => {
             if (previewData.status && previewData.image) {
