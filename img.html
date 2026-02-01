@@ -709,7 +709,6 @@ body.light-mode .footer {
 </style>
 </head>
 <body class="light-mode">
-<!-- Navbar -->
 <nav>
   <div>
     <div class="nav-logo">
@@ -748,7 +747,6 @@ body.light-mode .footer {
     </div>
   </div>
 </nav>
-
 
 <!-- Main Content -->
 <div class="container">
@@ -915,9 +913,9 @@ document.addEventListener('DOMContentLoaded', function() {
   function toggleMode() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('light-mode', !isDarkMode);
-  modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
-modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
-}
+    modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+    modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
+  }
 
   modeToggle.addEventListener('click', toggleMode);
 
@@ -989,6 +987,12 @@ modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
     });
   });
   
+  // Function to check if font name ends with UNI
+  function isUniFont(fontName) {
+    return fontName.toUpperCase().endsWith('UNI.TTF') || 
+           fontName.toUpperCase().endsWith('UNI');
+  }
+  
   // Fetch fonts
   let selectedFont = '';
   const fontSelectBtn = document.getElementById('fontSelectBtn');
@@ -1021,7 +1025,10 @@ modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
         previewImg.loading = 'lazy';
         previewImg.alt = font;
         
-        fetch(`https://bit-x-apis.vercel.app/textimg?q=fïl ,iaikhs&font=${encodeURIComponent(font)}&size=30&align=center&color=%23000000&s=`)
+        // Use "මේක ලස්සනයි" for UNI fonts, "fïl ,iaikhs" for others
+        const previewText = isUniFont(font) ? 'මේක ලස්සනයි' : 'fïl ,iaikhs';
+        
+        fetch(`https://bit-x-apis.vercel.app/textimg?q=${encodeURIComponent(previewText)}&font=${encodeURIComponent(font)}&size=30&align=center&color=%23000000&s=`)
           .then(res => res.json())
           .then(previewData => {
             if (previewData.status && previewData.image) {
@@ -1082,7 +1089,8 @@ modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
     try {
       let processedText = text;
       
-      if (!bypassProcessing) {
+      // Check if font name ends with UNI - if so, bypass text processing
+      if (!bypassProcessing && !isUniFont(font)) {
         const textResp = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(text)}&type=${currentType}`);
         const textData = await textResp.json();
         if(!textData.status) throw new Error('Error processing text');
