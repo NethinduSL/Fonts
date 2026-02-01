@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinhala Font Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #000000;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  body {
+    overflow: hidden;
+    height: 100vh;
+  }
+}
+
+body.light-mode {
+  background: #ffffff;
+}
+
+.gradient-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.gradient-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #333333;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+body.light-mode input[type="range"] {
+  background: #e5e5e5;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.loader {
+  border: 2px solid #333333;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+body.light-mode .loader {
+  border: 2px solid #e5e5e5;
+  border-top: 2px solid #3b82f6;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.align-btn.active, .style-btn.active {
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Navbar */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  padding: 10px 12px;
+  background: #000000;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+body.light-mode nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+nav > div {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+body.light-mode .nav-title {
+  color: #000000;
+}
+
+.mode-toggle {
+  padding: 8px;
+  border-radius: 8px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+body.light-mode .mode-toggle {
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+}
+
+.mode-toggle:hover {
+  background: #333333;
+}
+
+body.light-mode .mode-toggle:hover {
+  background: #e5e5e5;
+}
+
+/* Main Content */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 12px 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+body.light-mode .header h2 {
+  color: #000000;
+}
+
+@media (min-width: 640px) {
+  .header h2 { font-size: 30px; }
+}
+
+@media (min-width: 768px) {
+  .header h2 { font-size: 36px; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+.panel {
+  border-radius: 16px;
+  padding: 16px;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .panel {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 640px) {
+  .panel { padding: 20px; }
+}
+
+@media (min-width: 768px) {
+  .panel { padding: 24px; }
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+}
+
+.label {
+  display: block;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+body.light-mode .label {
+  color: #000000;
+}
+
+.input-group {
+  margin-bottom: 12px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 12px;
+  resize: none;
+  height: 80px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+body.light-mode textarea {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  color: #000000;
+}
+
+textarea::placeholder {
+  color: #666666;
+}
+
+body.light-mode textarea::placeholder {
+  color: #999999;
+}
+
+textarea:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 0;
+}
+
+.textarea-wrapper {
+  position: relative;
+}
+
+.textarea-controls {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 6px;
+}
+
+.toggle-btn {
+  padding: 4px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.3s;
+}
+
+body.light-mode .toggle-btn {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+}
+
+.toggle-btn:hover {
+  background: #333333;
+}
+
+body.light-mode .toggle-btn:hover {
+  background: #e5e5e5;
+}
+
+.select-btn {
+  width: 100%;
+  padding: 8px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: none;
+  transition: all 0.3s;
+}
+
+body.light-mode .select-btn {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  color: #000000;
+}
+
+.select-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 0;
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  margin-top: 4px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  max-height: 192px;
+  overflow-y: auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+body.light-mode .dropdown {
+  background: #ffffff;
+  border: 1px solid #d1d1d1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown.hidden {
+  display: none;
+}
+
+.dropdown-content {
+  padding: 6px;
+}
+
+.dropdown-item {
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdown-item:hover {
+  background: #333333;
+}
+
+body.light-mode .dropdown-item:hover {
+  background: #f5f5f5;
+}
+
+.dropdown-item img {
+  width: 20%;
+  max-height: 40px;
+  object-fit: contain;
+  background: white;
+  border-radius: 4px;
+}
+
+.dropdown-item span {
+  color: #ffffff;
+  font-size: 10px;
+}
+
+body.light-mode .dropdown-item span {
+  color: #000000;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+
+.color-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+input[type="color"] {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid #333333;
+  cursor: pointer;
+  background: transparent;
+}
+
+body.light-mode input[type="color"] {
+  border: 1px solid #d1d1d1;
+}
+
+input[type="text"],
+input[type="number"] {
+  flex: 1;
+  padding: 6px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 12px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+body.light-mode input[type="text"],
+body.light-mode input[type="number"] {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  color: #000000;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 0;
+}
+
+.style-btn, .align-btn {
+  padding: 6px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+body.light-mode .style-btn,
+body.light-mode .align-btn {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+}
+
+.style-btn:hover, .align-btn:hover {
+  background: #333333;
+}
+
+body.light-mode .style-btn:hover,
+body.light-mode .align-btn:hover {
+  background: #e5e5e5;
+}
+
+.style-btn i, .align-btn i {
+  color: #ffffff;
+  font-size: 11px;
+}
+
+body.light-mode .style-btn i,
+body.light-mode .align-btn i {
+  color: #000000;
+}
+
+.generate-btn {
+  width: 100%;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+  color: white;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #999999;
+  cursor: pointer;
+  margin-bottom: 12px;
+  font-size: 10px;
+}
+
+body.light-mode .checkbox-label {
+  color: #666666;
+}
+
+.checkbox-label input {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loading {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.loading.hidden {
+  display: none;
+}
+
+.loading p {
+  color: #999999;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+body.light-mode .loading p {
+  color: #666666;
+}
+
+.preview-title {
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+body.light-mode .preview-title {
+  color: #000000;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.image-placeholder {
+  text-align: center;
+  color: #666666;
+}
+
+body.light-mode .image-placeholder {
+  color: #999999;
+}
+
+.image-placeholder i {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+.image-placeholder p {
+  font-size: 12px;
+}
+
+.image-result {
+  width: 100%;
+}
+
+.image-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .image-wrapper {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-wrapper img {
+  min-height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+.download-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 16px;
+  background: #000000;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: 12px;
+  border: 1px solid #333333;
+}
+
+body.light-mode .download-btn {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #d1d1d1;
+}
+
+.download-btn:hover {
+  background: #1a1a1a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .download-btn:hover {
+  background: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #666666;
+  font-size: 10px;
+}
+
+body.light-mode .footer {
+  color: #999999;
+}
+
+.footer i.fa-heart {
+  color: #ef4444;
+}
+
+.text-blue-400 {
+  color: #60a5fa;
+}
+
+@media (min-width: 640px) {
+  nav { padding: 10px 16px; }
+  .nav-title { font-size: 18px; }
+  .container { padding: 80px 16px 24px; }
+}
+
+@media (min-width: 1024px) {
+  nav { padding: 10px 24px; }
+  .container { padding: 80px 24px 24px; }
+}
+
+/* Relative positioning for dropdowns */
+.relative {
+  position: relative;
+}
+</style>
+</head>
+<body class="light-mode">
+<!-- Navbar -->
+<nav>
+  <div>
+    <div class="nav-logo">
+      <div class="nav-icon">
+        <i class="fas fa-font text-white" style="font-size: 14px;"></i>
+      </div>
+      <h1 class="nav-title">Sinhala Generator</h1>
+    </div>
+    <button id="modeToggle" class="mode-toggle">
+      <i class="fas fa-sun text-yellow-300" id="modeIcon" style="font-size: 14px; color: #fbbf24;"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  
+  <!-- Header Section -->
+  <div class="header animate-fade-in">
+    <h2>SINFIG By E box❤️</h2>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="grid">
+    
+    <!-- Left Panel - Controls -->
+    <div class="panel animate-fade-in">
+      
+      <!-- Text Input -->
+      <div class="input-group">
+        <label class="label">
+          <i class="fas fa-keyboard" style="margin-right: 4px;"></i>Your Text
+        </label>
+        <div class="textarea-wrapper">
+          <textarea id="userText" placeholder="TEXT HERE"></textarea>
+          <div class="textarea-controls">
+            <button id="typeToggle" class="toggle-btn" title="Toggle Text Type">
+              <i class="fas fa-exchange-alt text-blue-400" style="font-size: 10px;"></i>
+              <span class="text-blue-400" id="typeLabel" style="font-size: 10px; margin-left: 2px;">1</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Font Selection -->
+      <div class="input-group">
+        <label class="label">
+          <i class="fas fa-palette" style="margin-right: 4px;"></i>Font Style
+        </label>
+        <div class="relative">
+          <button id="fontSelectBtn" class="select-btn">
+            <span id="selectedFontText">Loading fonts...</span>
+            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+          </button>
+          <div id="fontDropdown" class="dropdown hidden">
+            <div class="dropdown-content" id="fontOptions">
+              <div style="text-align: center; color: #666666; padding: 8px; font-size: 12px;">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Size and Color -->
+      <div class="grid-2">
+        <!-- Size Slider -->
+        <div>
+          <label class="label">
+            <i class="fas fa-text-height" style="margin-right: 4px;"></i>Size
+          </label>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <input type="range" id="fontSize" min="200" max="3000" value="200" style="flex: 1;">
+            <input type="number" id="fontSizeInput" value="200" min="200" max="3000" style="width: 60px; padding: 4px;">
+          </div>
+        </div>
+
+        <!-- Text Color -->
+        <div>
+          <label class="label">
+            <i class="fas fa-palette" style="margin-right: 4px;"></i>Color
+          </label>
+          <div class="color-input">
+            <input type="color" id="textColor" value="#000000">
+            <input type="text" id="colorHex" value="#000000" placeholder="#000000">
+          </div>
+        </div>
+      </div>
+
+      <!-- Style and Alignment -->
+      <div class="grid-2">
+        <!-- Text Style -->
+        <div>
+          <label class="label">
+            <i class="fas fa-font" style="margin-right: 4px;"></i>Style
+          </label>
+          <div class="grid-3">
+            <button class="style-btn" data-style="b" title="Bold">
+              <i class="fas fa-bold"></i>
+            </button>
+            <button class="style-btn" data-style="i" title="Italic">
+              <i class="fas fa-italic"></i>
+            </button>
+            <button class="style-btn" data-style="u" title="Underline">
+              <i class="fas fa-underline"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Text Alignment -->
+        <div>
+          <label class="label">
+            <i class="fas fa-align-left" style="margin-right: 4px;"></i>Align
+          </label>
+          <div class="grid-3">
+            <button class="align-btn active" data-align="left">
+              <i class="fas fa-align-left"></i>
+            </button>
+            <button class="align-btn" data-align="center">
+              <i class="fas fa-align-center"></i>
+            </button>
+            <button class="align-btn" data-align="right">
+              <i class="fas fa-align-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generate Button -->
+      <button id="generateBtn" class="generate-btn gradient-btn">
+        <i class="fas fa-magic" style="margin-right: 6px;"></i>Generate Image
+      </button>
+
+      <!-- Bypass Text Processing -->
+      <label class="checkbox-label">
+        <input type="checkbox" id="bypassProcessing">
+        <span>Skip text processing</span>
+      </label>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="loading hidden">
+        <div class="loader"></div>
+        <p>Creating...</p>
+      </div>
+
+    </div>
+
+    <!-- Right Panel - Image Preview -->
+    <div class="panel animate-fade-in">
+      <h3 class="preview-title">
+        <i class="fas fa-image" style="margin-right: 6px;"></i>Preview
+      </h3>
+      
+      <!-- Image Display -->
+      <div id="imageContainer" class="image-container">
+        <div class="image-placeholder">
+          <i class="fas fa-image"></i>
+          <p>Your generated image will appear here</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Made with <i class="fas fa-heart"></i> for Sinhala Typography By Nethindu Thaminda 🥰</p>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  let isDarkMode = false; // Start in light mode
+  const modeToggle = document.getElementById('modeToggle');
+  const modeIcon = document.getElementById('modeIcon');
+
+  function toggleMode() {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle('light-mode', !isDarkMode);
+  modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
+}
+
+  modeToggle.addEventListener('click', toggleMode);
+
+  const fontSizeSlider = document.getElementById('fontSize');
+  const fontSizeInput = document.getElementById('fontSizeInput');
+
+  fontSizeSlider.addEventListener('input', () => {
+    fontSizeInput.value = fontSizeSlider.value;
+  });
+
+  fontSizeInput.addEventListener('input', () => {
+    const value = parseInt(fontSizeInput.value);
+    if (!isNaN(value) && value >= 200 && value <= 3000) {
+      fontSizeSlider.value = value;
+    }
+  });
+
+  // Color Picker
+  const textColorPicker = document.getElementById('textColor');
+  const colorHexInput = document.getElementById('colorHex');
+  
+  textColorPicker.addEventListener('input', (e) => {
+    colorHexInput.value = e.target.value;
+  });
+  
+  colorHexInput.addEventListener('input', (e) => {
+    const hex = e.target.value;
+    if(/^#[0-9A-F]{6}$/i.test(hex)) {
+      textColorPicker.value = hex;
+    }
+  });
+  
+  // Text Type Toggle
+  let currentType = 1;
+  const typeToggle = document.getElementById('typeToggle');
+  const typeLabel = document.getElementById('typeLabel');
+  
+  typeToggle.addEventListener('click', () => {
+    currentType = currentType >= 4 ? 1 : currentType + 1;
+    typeLabel.textContent = currentType;
+  });
+  
+  // Text Style
+  let selectedStyles = [];
+  const styleButtons = document.querySelectorAll('.style-btn');
+  
+  styleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const style = btn.dataset.style;
+      if (selectedStyles.includes(style)) {
+        selectedStyles = selectedStyles.filter(s => s !== style);
+        btn.classList.remove('active');
+      } else {
+        selectedStyles.push(style);
+        btn.classList.add('active');
+      }
+    });
+  });
+  
+  // Text Alignment
+  let selectedAlign = 'left';
+  const alignButtons = document.querySelectorAll('.align-btn');
+  
+  alignButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      alignButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedAlign = btn.dataset.align;
+    });
+  });
+  
+  // Fetch fonts
+  let selectedFont = '';
+  const fontSelectBtn = document.getElementById('fontSelectBtn');
+  const fontDropdown = document.getElementById('fontDropdown');
+  const fontOptions = document.getElementById('fontOptions');
+  const selectedFontText = document.getElementById('selectedFontText');
+  
+  fontSelectBtn.addEventListener('click', () => {
+    fontDropdown.classList.toggle('hidden');
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (!fontSelectBtn.contains(e.target) && !fontDropdown.contains(e.target)) {
+      fontDropdown.classList.add('hidden');
+    }
+  });
+  
+  fetch('https://bit-x-apis.vercel.app/fonts')
+    .then(res => res.json())
+    .then(data => {
+      selectedFont = data.fonts[0];
+      selectedFontText.textContent = selectedFont.replace(/\.TTF$/i, '');
+      fontOptions.innerHTML = '';
+      
+      data.fonts.forEach(font => {
+        const option = document.createElement('div');
+        option.className = 'dropdown-item';
+        
+        const previewImg = document.createElement('img');
+        previewImg.loading = 'lazy';
+        previewImg.alt = font;
+        
+        fetch(`https://bit-x-apis.vercel.app/textimg?q=fïl ,iaikhs&font=${encodeURIComponent(font)}&size=30&align=center&color=%23000000&s=`)
+          .then(res => res.json())
+          .then(previewData => {
+            if (previewData.status && previewData.image) {
+              previewImg.src = previewData.image;
+              previewImg.onerror = () => option.remove();
+            } else {
+              option.remove();
+            }
+          })
+          .catch(() => option.remove());
+        
+        const fontName = document.createElement('span');
+        fontName.textContent = font.replace(/\.TTF$/i, '');
+        
+        option.appendChild(previewImg);
+        option.appendChild(fontName);
+        
+        option.addEventListener('click', () => {
+          selectedFont = font;
+          selectedFontText.textContent = font.replace(/\.TTF$/i, '');
+          fontDropdown.classList.add('hidden');
+        });
+        
+        fontOptions.appendChild(option);
+      });
+    })
+    .catch(() => {
+      fontOptions.innerHTML = '<div style="text-align: center; color: #ef4444; padding: 16px; font-size: 12px;">Error loading fonts</div>';
+    });
+  
+  // Generate Image
+  const generateBtn = document.getElementById('generateBtn');
+  generateBtn.addEventListener('click', async () => {
+    let text = document.getElementById('userText').value;
+    text = text.replace(/\r?\n/g, '\n');
+    
+    const font = selectedFont;
+    const size = fontSizeSlider.value;
+    const color = colorHexInput.value.replace('#', '');
+    const align = selectedAlign;
+    const bypassProcessing = document.getElementById('bypassProcessing').checked;
+    const loadingState = document.getElementById('loadingState');
+    const imageContainer = document.getElementById('imageContainer');
+    
+    if(!text) {
+      alert('Please enter some text');
+      return;
+    }
+    
+    if(!font) {
+      alert('Please select a font');
+      return;
+    }
+    
+    loadingState.classList.remove('hidden');
+    imageContainer.innerHTML = '';
+    
+    try {
+      let processedText = text;
+      
+      if (!bypassProcessing) {
+        const textResp = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(text)}&type=${currentType}`);
+        const textData = await textResp.json();
+        if(!textData.status) throw new Error('Error processing text');
+        processedText = textData.response;
+      }
+      
+      let styleValue = '';
+      if (selectedStyles.length > 0) {
+        const sortedStyles = selectedStyles.sort((a, b) => {
+          const order = { 'b': 0, 'i': 1, 'u': 2 };
+          return order[a] - order[b];
+        });
+        styleValue = sortedStyles.join('');
+      }
+      
+      const imgResp = await fetch(`https://bit-x-apis.vercel.app/textimg?q=${encodeURIComponent(processedText)}&font=${encodeURIComponent(font)}&size=${encodeURIComponent(size)}&align=${align}&color=%23${color}&s=${styleValue}`);
+      const imgData = await imgResp.json();
+      if(!imgData.status) throw new Error('Error generating image');
+      
+      loadingState.classList.add('hidden');
+      
+      imageContainer.innerHTML = `
+        <div class="image-result animate-fade-in">
+          <div class="image-wrapper">
+            <img src="${imgData.image}" alt="Generated">
+          </div>
+          <a href="${imgData.image}" download="sinhala-text.png" class="download-btn">
+            <i class="fas fa-download" style="margin-right: 6px;"></i>Download Image
+          </a>
+        </div>
+      `;
+    } catch(error) {
+      loadingState.classList.add('hidden');
+      alert(error.message);
+    }
+  });
+  
+});
+</script>
+</body>
+</html>

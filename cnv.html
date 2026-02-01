@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinhala Text Converter</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #000000;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  body {
+    overflow: hidden;
+    height: 100vh;
+  }
+}
+
+body.light-mode {
+  background: #ffffff;
+}
+
+.gradient-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.gradient-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.loader {
+  border: 2px solid #333333;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+body.light-mode .loader {
+  border: 2px solid #e5e5e5;
+  border-top: 2px solid #3b82f6;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Navbar */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  padding: 10px 12px;
+  background: #000000;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+body.light-mode nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+nav > div {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+body.light-mode .nav-title {
+  color: #000000;
+}
+
+.mode-toggle {
+  padding: 8px;
+  border-radius: 8px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+body.light-mode .mode-toggle {
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+}
+
+.mode-toggle:hover {
+  background: #333333;
+}
+
+body.light-mode .mode-toggle:hover {
+  background: #e5e5e5;
+}
+
+/* Main Content */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 12px 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+body.light-mode .header h2 {
+  color: #000000;
+}
+
+@media (min-width: 640px) {
+  .header h2 { font-size: 30px; }
+}
+
+@media (min-width: 768px) {
+  .header h2 { font-size: 36px; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+.panel {
+  border-radius: 16px;
+  padding: 16px;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .panel {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 640px) {
+  .panel { padding: 20px; }
+}
+
+@media (min-width: 768px) {
+  .panel { padding: 24px; }
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+}
+
+.label {
+  display: block;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+body.light-mode .label {
+  color: #000000;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 200px;
+  outline: none;
+  transition: all 0.3s;
+  font-family: 'Inter', sans-serif;
+}
+
+body.light-mode textarea {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  color: #000000;
+}
+
+textarea::placeholder {
+  color: #666666;
+}
+
+body.light-mode textarea::placeholder {
+  color: #999999;
+}
+
+textarea:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 0;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+body.light-mode select {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  color: #000000;
+}
+
+select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 0;
+}
+
+.select-wrapper::after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+body.light-mode .select-wrapper::after {
+  color: #000000;
+}
+
+select option {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 8px;
+}
+
+body.light-mode select option {
+  background: #ffffff;
+  color: #000000;
+}
+
+select optgroup {
+  background: #0a0a0a;
+  color: #999999;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+body.light-mode select optgroup {
+  background: #f0f0f0;
+  color: #666666;
+}
+
+.convert-btn {
+  width: 100%;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  color: white;
+  margin-bottom: 16px;
+}
+
+.loading {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.loading.hidden {
+  display: none;
+}
+
+.loading p {
+  color: #999999;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+body.light-mode .loading p {
+  color: #666666;
+}
+
+.output-title {
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+body.light-mode .output-title {
+  color: #000000;
+}
+
+.output-container {
+  min-height: 200px;
+}
+
+.output-placeholder {
+  text-align: center;
+  color: #666666;
+  padding: 40px 20px;
+}
+
+body.light-mode .output-placeholder {
+  color: #999999;
+}
+
+.output-placeholder i {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+.output-placeholder p {
+  font-size: 14px;
+}
+
+.output-text {
+  width: 100%;
+  padding: 12px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  min-height: 200px;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+body.light-mode .output-text {
+  background: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  color: #000000;
+}
+
+.copy-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background: #000000;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-size: 14px;
+  border: 1px solid #333333;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+body.light-mode .copy-btn {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #d1d1d1;
+}
+
+.copy-btn:hover {
+  background: #1a1a1a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .copy-btn:hover {
+  background: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.copy-btn.copied {
+  background: #10b981 !important;
+  color: white !important;
+  border-color: #10b981 !important;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #666666;
+  font-size: 10px;
+}
+
+body.light-mode .footer {
+  color: #999999;
+}
+
+.footer i.fa-heart {
+  color: #ef4444;
+}
+
+@media (min-width: 640px) {
+  nav { padding: 10px 16px; }
+  .nav-title { font-size: 18px; }
+  .container { padding: 80px 16px 24px; }
+}
+
+@media (min-width: 1024px) {
+  nav { padding: 10px 24px; }
+  .container { padding: 80px 24px 24px; }
+}
+</style>
+</head>
+<body class="light-mode">
+<!-- Navbar -->
+<nav>
+  <div>
+    <div class="nav-logo">
+      <div class="nav-icon">
+        <i class="fas fa-language text-white" style="font-size: 14px;"></i>
+      </div>
+      <h1 class="nav-title">Sinhala Text Converter</h1>
+    </div>
+    <button id="modeToggle" class="mode-toggle">
+      <i class="fas fa-sun" id="modeIcon" style="font-size: 14px; color: #fbbf24;"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  
+  <!-- Header Section -->
+  <div class="header animate-fade-in">
+    <h2>Text Converter By E box❤️</h2>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="grid">
+    
+    <!-- Left Panel - Input -->
+    <div class="panel animate-fade-in">
+      
+      <!-- Text Input -->
+      <div class="input-group">
+        <label class="label">
+          <i class="fas fa-keyboard" style="margin-right: 6px;"></i>Input Text
+        </label>
+        <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+      </div>
+
+      <!-- Type Selection -->
+      <div class="input-group">
+        <label class="label">
+          <i class="fas fa-sliders-h" style="margin-right: 6px;"></i>Conversion Type
+        </label>
+        <div class="select-wrapper">
+          <select id="conversionType">
+            <optgroup label="Unicode to Legacy">
+              <option value="1">Unicode to DL-Manel</option>
+              <option value="2">Unicode to Bamini</option>
+              <option value="3">Unicode to Kaputa</option>
+            </optgroup>
+            <optgroup label="Legacy to Unicode">
+              <option value="4">Kaputa to Unicode</option>
+              <option value="5">Amalee to Unicode</option>
+              <option value="6">Thibus to Unicode</option>
+              <option value="7">FM-Abaya to Unicode</option>
+              <option value="8">DL-Manel to Unicode</option>
+              <option value="9">Bamini to Unicode</option>
+            </optgroup>
+            <optgroup label="Singlish to Unicode">
+              <option value="10">Singlish to Unicode</option>
+              <option value="11">Singlish Phonetic to Unicode</option>
+            </optgroup>
+            <optgroup label="Tanglish to Unicode">
+              <option value="12">Tanglish to Unicode</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="loading hidden">
+        <div class="loader"></div>
+        <p>Converting...</p>
+      </div>
+
+    </div>
+
+    <!-- Right Panel - Output -->
+    <div class="panel animate-fade-in">
+      <h3 class="output-title">
+        <i class="fas fa-file-alt" style="margin-right: 8px;"></i>Converted Output
+      </h3>
+      
+      <!-- Output Display -->
+      <div id="outputContainer" class="output-container">
+        <div class="output-placeholder">
+          <i class="fas fa-file-text"></i>
+          <p>Your converted text will appear here</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Made with <i class="fas fa-heart"></i> for Sinhala Typography By Nethindu Thaminda 🥰</p>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  let isDarkMode = false; // Start in light mode
+  const modeToggle = document.getElementById('modeToggle');
+  const modeIcon = document.getElementById('modeIcon');
+
+  function toggleMode() {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle('light-mode', !isDarkMode);
+  modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';  }
+
+  modeToggle.addEventListener('click', toggleMode);
+
+  // Real-time Convert Text
+  const inputText = document.getElementById('inputText');
+  const conversionType = document.getElementById('conversionType');
+  const loadingState = document.getElementById('loadingState');
+  const outputContainer = document.getElementById('outputContainer');
+  
+  let debounceTimer;
+
+  async function convertText() {
+    const text = inputText.value.trim();
+    const type = conversionType.value;
+    
+    if (!text) {
+      outputContainer.innerHTML = `
+        <div class="output-placeholder">
+          <i class="fas fa-file-text"></i>
+          <p>Your converted text will appear here</p>
+        </div>
+      `;
+      return;
+    }
+    
+    loadingState.classList.remove('hidden');
+    
+    try {
+      const response = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(text)}&type=${type}`);
+      const data = await response.json();
+      
+      loadingState.classList.add('hidden');
+      
+      if (data.status && data.response) {
+        outputContainer.innerHTML = `
+          <div>
+            <div class="output-text">${data.response}</div>
+            <button id="copyBtn" class="copy-btn">
+              <i class="fas fa-copy" style="margin-right: 6px;"></i>Copy to Clipboard
+            </button>
+          </div>
+        `;
+        
+        // Add copy functionality
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(data.response).then(() => {
+            copyBtn.classList.add('copied');
+            copyBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 6px;"></i>Copied!';
+            
+            setTimeout(() => {
+              copyBtn.classList.remove('copied');
+              copyBtn.innerHTML = '<i class="fas fa-copy" style="margin-right: 6px;"></i>Copy to Clipboard';
+            }, 2000);
+          }).catch(err => {
+            alert('Failed to copy text');
+          });
+        });
+      } else {
+        throw new Error('Conversion failed');
+      }
+    } catch (error) {
+      loadingState.classList.add('hidden');
+      outputContainer.innerHTML = `
+        <div class="output-placeholder">
+          <i class="fas fa-exclamation-circle" style="color: #ef4444;"></i>
+          <p style="color: #ef4444;">Error converting text. Please try again.</p>
+        </div>
+      `;
+    }
+  }
+
+  function handleInput() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      convertText();
+    }, 500); // Wait 500ms after user stops typing
+  }
+
+  // Real-time conversion on input
+  inputText.addEventListener('input', handleInput);
+  
+  // Instant conversion on type change
+  conversionType.addEventListener('change', () => {
+    if (inputText.value.trim()) {
+      convertText();
+    }
+  });
+  
+});
+</script>
+</body>
+</html>
