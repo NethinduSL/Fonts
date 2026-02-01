@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sinhala Font Generator</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>SINFIG - Sinhala Text Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -15,79 +15,14 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: #ffffff;
   overflow-x: hidden;
   min-height: 100vh;
-  transition: all 0.5s;
+  transition: background 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  body {
-    overflow: hidden;
-    height: 100vh;
-  }
-}
-body.light-mode {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-}
-
-body.light-mode .glass {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-light {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.gradient-btn {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.gradient-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  outline: none;
-  cursor: pointer;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  cursor: pointer;
-  border-radius: 50%;
-  border: none;
+body.dark-mode {
+  background: #000000;
 }
 
 .animate-fade-in {
@@ -99,26 +34,6 @@ input[type="range"]::-moz-range-thumb {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.loader {
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-top: 2px solid #3b82f6;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.align-btn.active, .style-btn.active {
-  background: rgba(59, 130, 246, 0.3) !important;
-  border-color: #3b82f6 !important;
-}
-
 /* Navbar */
 nav {
   position: fixed;
@@ -126,6 +41,13 @@ nav {
   top: 0;
   z-index: 50;
   padding: 10px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+body.dark-mode nav {
+  background: #000000;
+  border-bottom: 1px solid #1a1a1a;
 }
 
 nav > div {
@@ -155,439 +77,221 @@ nav > div {
 .nav-title {
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  color: #000000;
+}
+
+body.dark-mode .nav-title {
+  color: #ffffff;
 }
 
 .mode-toggle {
   padding: 8px;
   border-radius: 8px;
-  background: transparent;
-  border: none;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
   cursor: pointer;
   transition: all 0.3s;
 }
 
+body.dark-mode .mode-toggle {
+  background: #1a1a1a;
+  border: 1px solid #333333;
+}
+
 .mode-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #e5e5e5;
+}
+
+body.dark-mode .mode-toggle:hover {
+  background: #333333;
 }
 
 /* Main Content */
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 80px 12px 24px;
+  padding: 100px 12px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (min-width: 768px) {
-  .container {
-    height: 100vh;
-    overflow: hidden;
-  }
-}
-
-.header {
+.hero {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 60px;
 }
 
-.header h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 8px;
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+body.dark-mode .hero h1 {
+  color: #ffffff;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #666666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+body.dark-mode .hero p {
+  color: #999999;
 }
 
 @media (min-width: 640px) {
-  .header h2 { font-size: 30px; }
+  .hero h1 { font-size: 64px; }
+  .hero p { font-size: 20px; }
 }
 
-@media (min-width: 768px) {
-  .header h2 { font-size: 36px; }
-}
-
-.grid {
+.cards-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-}
-
-.panel {
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-@media (min-width: 640px) {
-  .panel { padding: 20px; }
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
 }
 
 @media (min-width: 768px) {
-  .panel { padding: 24px; }
-}
-
-@media (min-width: 1024px) {
-  .panel {
-    overflow-y: auto;
-    max-height: calc(100vh - 200px);
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-.label {
-  display: block;
-  color: white;
-  font-weight: 600;
-  margin-bottom: 6px;
-  font-size: 12px;
-}
-
-.input-group {
-  margin-bottom: 12px;
-}
-
-textarea {
-  width: 100%;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: white;
-  font-size: 12px;
-  resize: none;
-  height: 80px;
-  outline: none;
-  transition: all 0.3s;
-}
-
-textarea::placeholder {
-  color: #9ca3af;
-}
-
-textarea:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 0;
-}
-
-.textarea-wrapper {
-  position: relative;
-}
-
-.textarea-controls {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  display: flex;
-  gap: 6px;
-}
-
-.toggle-btn {
-  padding: 4px;
-  background: rgba(59, 130, 246, 0.2);
-  border: none;
-  border-radius: 4px;
+.card {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 10px;
-  transition: all 0.3s;
-}
-
-.toggle-btn:hover {
-  background: rgba(59, 130, 246, 0.3);
-}
-
-.select-btn {
-  width: 100%;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: white;
-  font-size: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  outline: none;
-  transition: all 0.3s;
-}
-
-.select-btn:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 0;
-}
-
-.dropdown {
-  position: absolute;
-  width: 100%;
-  margin-top: 4px;
-  background: #1f2937;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  max-height: 192px;
-  overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  z-index: 10;
-}
-
-.dropdown.hidden {
-  display: none;
-}
-
-.dropdown-content {
-  padding: 6px;
-}
-
-.dropdown-item {
-  padding: 6px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.dropdown-item img {
-  width: 20%;
-  max-height: 40px;
-  object-fit: contain;
-  background: white;
-  border-radius: 4px;
-}
-
-.dropdown-item span {
-  color: white;
-  font-size: 10px;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px;
-}
-
-.color-input {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-input[type="color"] {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  background: transparent;
-}
-
-input[type="text"] {
-  flex: 1;
-  padding: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  color: white;
-  font-size: 12px;
-  outline: none;
-  transition: all 0.3s;
-}
-
-input[type="text"]:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 0;
-}
-
-.style-btn, .align-btn {
-  padding: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.style-btn:hover, .align-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.style-btn i, .align-btn i {
-  color: white;
-  font-size: 11px;
-}
-
-.generate-btn {
-  width: 100%;
-  padding: 10px 16px;
-  font-weight: 600;
-  font-size: 12px;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 8px;
-  color: white;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  color: #d1d5db;
-  cursor: pointer;
-  margin-bottom: 12px;
-  font-size: 10px;
-}
-
-.checkbox-label input {
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.loading {
-  margin-top: 12px;
-  text-align: center;
-}
-
-.loading.hidden {
-  display: none;
-}
-
-.loading p {
-  color: #d1d5db;
-  margin-top: 8px;
-  font-size: 12px;
-}
-
-.preview-title {
-  color: white;
-  font-weight: 600;
-  margin-bottom: 16px;
-  font-size: 14px;
-}
-
-.image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-}
-
-.image-placeholder {
-  text-align: center;
-  color: #9ca3af;
-}
-
-.image-placeholder i {
-  font-size: 48px;
-  margin-bottom: 12px;
-  opacity: 0.3;
-}
-
-.image-placeholder p {
-  font-size: 12px;
-}
-
-.image-result {
-  width: 100%;
-}
-
-.image-wrapper {
-  background: white;
-  border-radius: 12px;
-  padding: 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-.image-wrapper img {
-  min-height: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  display: block;
-}
-
-.download-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 10px 16px;
-  background: #10b981;
-  color: white;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s;
   text-decoration: none;
-  font-size: 12px;
+  display: block;
 }
 
-.download-btn:hover {
-  background: #059669;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+body.dark-mode .card {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+body.dark-mode .card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-icon i {
+  font-size: 24px;
+  color: white;
+}
+
+.card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+body.dark-mode .card h2 {
+  color: #ffffff;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+body.dark-mode .card p {
+  color: #999999;
+}
+
+.card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #888888;
+}
+
+body.dark-mode .feature-item {
+  color: #777777;
+}
+
+.feature-item i {
+  color: #3b82f6;
+  font-size: 12px;
 }
 
 .footer {
   text-align: center;
-  margin-top: 16px;
-  color: #9ca3af;
-  font-size: 10px;
+  margin-top: 60px;
+  color: #999999;
+  font-size: 14px;
+}
+
+body.dark-mode .footer {
+  color: #666666;
 }
 
 .footer i.fa-heart {
   color: #ef4444;
 }
 
-.text-blue-400 {
-  color: #60a5fa;
-}
-
 @media (min-width: 640px) {
   nav { padding: 10px 16px; }
   .nav-title { font-size: 18px; }
-  .container { padding: 80px 16px 24px; }
+  .container { padding: 120px 16px 40px; }
 }
 
 @media (min-width: 1024px) {
   nav { padding: 10px 24px; }
-  .container { padding: 80px 24px 24px; }
-}
-
-/* Relative positioning for dropdowns */
-.relative {
-  position: relative;
+  .container { padding: 120px 24px 40px; }
 }
 </style>
 </head>
-<body>
+<body class="light-mode">
 
 <!-- Navbar -->
-<nav class="glass">
+<nav>
   <div>
     <div class="nav-logo">
       <div class="nav-icon">
         <i class="fas fa-font text-white" style="font-size: 14px;"></i>
       </div>
-      <h1 class="nav-title">Sinhala Generator</h1>
+      <h1 class="nav-title">SINFIG</h1>
     </div>
-    <button id="modeToggle" class="mode-toggle glass">
-      <i class="fas fa-sun text-yellow-300" id="modeIcon" style="font-size: 14px;"></i>
+    <button id="modeToggle" class="mode-toggle">
+      <i class="fas fa-moon" id="modeIcon" style="font-size: 14px; color: #374151;"></i>
     </button>
   </div>
 </nav>
@@ -595,148 +299,60 @@ input[type="text"]:focus {
 <!-- Main Content -->
 <div class="container">
   
-  <!-- Header Section -->
-  <div class="header animate-fade-in">
-    <h2>SINFIG By E box❤️    </h2>
+  <!-- Hero Section -->
+  <div class="hero animate-fade-in">
+    <h1>SINFIG</h1>
+    <p>Professional Sinhala text tools for conversion and font generation. Choose your tool below.</p>
   </div>
 
-  <!-- Main Layout -->
-  <div class="grid">
+  <!-- Cards Grid -->
+  <div class="cards-grid">
     
-    <!-- Left Panel - Controls -->
-    <div class="panel glass animate-fade-in">
-      
-      <!-- Text Input -->
-      <div class="input-group">
-        <label class="label">
-          <i class="fas fa-keyboard" style="margin-right: 4px;"></i>Your Text
-        </label>
-        <div class="textarea-wrapper">
-          <textarea id="userText" placeholder="TEXT HERE"></textarea>
-          <div class="textarea-controls">
-            <button id="typeToggle" class="toggle-btn" title="Toggle Text Type">
-              <i class="fas fa-exchange-alt text-blue-400" style="font-size: 10px;"></i>
-              <span class="text-blue-400" id="typeLabel" style="font-size: 10px; margin-left: 2px;">1</span>
-            </button>
-          </div>
+    <!-- Text Converter Card -->
+    <a href="cnv.html" class="card animate-fade-in">
+      <div class="card-icon">
+        <i class="fas fa-exchange-alt"></i>
+      </div>
+      <h2>Text Converter</h2>
+      <p>Real-time Sinhala text conversion between Unicode, Legacy fonts, and Singlish formats.</p>
+      <div class="card-features">
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>12 conversion types</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Real-time conversion</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Copy to clipboard</span>
         </div>
       </div>
+    </a>
 
-      <!-- Font Selection -->
-      <div class="input-group">
-        <label class="label">
-          <i class="fas fa-palette" style="margin-right: 4px;"></i>Font Style
-        </label>
-        <div class="relative">
-          <button id="fontSelectBtn" class="select-btn">
-            <span id="selectedFontText">Loading fonts...</span>
-            <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
-          </button>
-          <div id="fontDropdown" class="dropdown hidden">
-            <div class="dropdown-content" id="fontOptions">
-              <div style="text-align: center; color: #9ca3af; padding: 8px; font-size: 12px;">Loading...</div>
-            </div>
-          </div>
+    <!-- Font Generator Card -->
+    <a href="img.html" class="card animate-fade-in">
+      <div class="card-icon">
+        <i class="fas fa-font"></i>
+      </div>
+      <h2>Font Generator</h2>
+      <p>Create beautiful Sinhala text images with customizable fonts, colors, and styles.</p>
+      <div class="card-features">
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Multiple Sinhala fonts</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Custom styling</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Download as image</span>
         </div>
       </div>
-
-<!-- Size and Color -->
-<div class="grid-2">
-  <!-- Size Slider -->
-  <div>
-    <label class="label">
-      <i class="fas fa-text-height" style="margin-right: 4px;"></i>Size
-    </label>
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <input type="range" id="fontSize" min="200" max="3000" value="200" style="flex: 1;">
-      <input type="number" id="fontSizeInput" value="200" min="200" max="3000" style="width: 60px; padding: 4px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: white; font-size: 12px;">
-    </div>
-  </div>
-
-        <!-- Text Color -->
-        <div>
-          <label class="label">
-            <i class="fas fa-palette" style="margin-right: 4px;"></i>Color
-          </label>
-          <div class="color-input">
-            <input type="color" id="textColor" value="#000000">
-            <input type="text" id="colorHex" value="#000000" placeholder="#000000">
-          </div>
-        </div>
-      </div>
-
-      <!-- Style and Alignment -->
-      <div class="grid-2">
-        <!-- Text Style -->
-        <div>
-          <label class="label">
-            <i class="fas fa-font" style="margin-right: 4px;"></i>Style
-          </label>
-          <div class="grid-3">
-            <button class="style-btn" data-style="b" title="Bold">
-              <i class="fas fa-bold"></i>
-            </button>
-            <button class="style-btn" data-style="i" title="Italic">
-              <i class="fas fa-italic"></i>
-            </button>
-            <button class="style-btn" data-style="u" title="Underline">
-              <i class="fas fa-underline"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Text Alignment -->
-        <div>
-          <label class="label">
-            <i class="fas fa-align-left" style="margin-right: 4px;"></i>Align
-          </label>
-          <div class="grid-3">
-            <button class="align-btn active" data-align="left">
-              <i class="fas fa-align-left"></i>
-            </button>
-            <button class="align-btn" data-align="center">
-              <i class="fas fa-align-center"></i>
-            </button>
-            <button class="align-btn" data-align="right">
-              <i class="fas fa-align-right"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Generate Button -->
-      <button id="generateBtn" class="generate-btn gradient-btn">
-        <i class="fas fa-magic" style="margin-right: 6px;"></i>Generate Image
-      </button>
-
-      <!-- Bypass Text Processing -->
-      <label class="checkbox-label">
-        <input type="checkbox" id="bypassProcessing">
-        <span>Skip text processing</span>
-      </label>
-
-      <!-- Loading State -->
-      <div id="loadingState" class="loading hidden">
-        <div class="loader"></div>
-        <p>Creating...</p>
-      </div>
-
-    </div>
-
-    <!-- Right Panel - Image Preview -->
-    <div class="panel glass animate-fade-in">
-      <h3 class="preview-title">
-        <i class="fas fa-image" style="margin-right: 6px;"></i>Preview
-      </h3>
-      
-      <!-- Image Display -->
-      <div id="imageContainer" class="image-container">
-        <div class="image-placeholder">
-          <i class="fas fa-image"></i>
-          <p>Your generated image will appear here</p>
-        </div>
-      </div>
-    </div>
+    </a>
 
   </div>
 
@@ -750,263 +366,21 @@ input[type="text"]:focus {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   
-let isDarkMode = true;
-const modeToggle = document.getElementById('modeToggle');
-const modeIcon = document.getElementById('modeIcon');
+  let isDarkMode = false; // Start in light mode
+  const modeToggle = document.getElementById('modeToggle');
+  const modeIcon = document.getElementById('modeIcon');
 
-function toggleMode() {
-  isDarkMode = !isDarkMode;
-  document.body.classList.toggle('light-mode', !isDarkMode);
-  modeIcon.className = isDarkMode ? 'fas fa-sun text-yellow-300' : 'fas fa-moon';
-  modeIcon.style.color = isDarkMode ? '' : '#374151';
-  updateStyles();
-}
-
-function updateStyles() {
-  const isLight = document.body.classList.contains('light-mode');
-  const textColor = isLight ? '#1f2937' : 'white';
-  const bgColor = isLight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(30, 41, 59, 0.8)'; // updated bgColor
-  const borderColor = isLight ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.3)';
-  const glassBg = isLight ? 'rgba(255, 255, 255, 0.95)' : 'rgba(15, 23, 42, 0.95)'; // updated glassBg
-  const glassBorder = isLight ? '1px solid rgba(0, 0, 0, 0.05)' : '1px solid rgba(255, 255, 255, 0.1)';
-  const dropdownBg = isLight ? '#ffffff' : '#1f2937';
-  const dropdownBorder = isLight ? '2px solid rgba(0, 0, 0, 0.2)' : '2px solid rgba(255, 255, 255, 0.3)';
-  const sliderBg = isLight ? '#d1d5db' : '#4b5563'; // added sliderBg
-
-  document.querySelectorAll('.label, .nav-title, .header h2, .preview-title').forEach(el => {
-    el.style.color = textColor;
-  });
-
-  document.querySelectorAll('textarea, input[type="text"], .select-btn, .dropdown-item span').forEach(el => {
-    el.style.color = textColor;
-    el.style.background = bgColor;
-    el.style.border = borderColor;
-  });
-
-  document.querySelectorAll('input[type="range"]').forEach(el => {
-    el.style.background = sliderBg;
-  });
-
-  document.querySelectorAll('.style-btn, .align-btn').forEach(el => {
-    el.style.background = bgColor;
-    el.style.border = borderColor;
-    const icon = el.querySelector('i');
-    if (icon) icon.style.color = textColor;
-  });
-
-  document.querySelectorAll('.glass').forEach(el => {
-    el.style.background = glassBg;
-    el.style.border = glassBorder;
-  });
-
-  const dropdown = document.getElementById('fontDropdown');
-  if (dropdown) {
-    dropdown.style.background = dropdownBg;
-    dropdown.style.border = dropdownBorder;
+  function toggleMode() {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    document.body.classList.toggle('light-mode', !isDarkMode);
+    modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+    modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
   }
-}
-modeToggle.addEventListener('click', toggleMode);
 
-
-  
-  const fontSizeSlider = document.getElementById('fontSize');
-const fontSizeInput = document.getElementById('fontSizeInput');
-
-fontSizeSlider.addEventListener('input', () => {
-  fontSizeInput.value = fontSizeSlider.value;
-});
-
-fontSizeInput.addEventListener('input', () => {
-  const value = parseInt(fontSizeInput.value);
-  if (!isNaN(value) && value >= 200 && value <= 3000) {
-    fontSizeSlider.value = value;
-  }
-});
-  // Color Picker
-  const textColorPicker = document.getElementById('textColor');
-  const colorHexInput = document.getElementById('colorHex');
-  
-  textColorPicker.addEventListener('input', (e) => {
-    colorHexInput.value = e.target.value;
-  });
-  
-  colorHexInput.addEventListener('input', (e) => {
-    const hex = e.target.value;
-    if(/^#[0-9A-F]{6}$/i.test(hex)) {
-      textColorPicker.value = hex;
-    }
-  });
-  
-  // Text Type Toggle
-  let currentType = 1;
-  const typeToggle = document.getElementById('typeToggle');
-  const typeLabel = document.getElementById('typeLabel');
-  
-  typeToggle.addEventListener('click', () => {
-    currentType = currentType >= 4 ? 1 : currentType + 1;
-    typeLabel.textContent = currentType;
-  });
-  
-  // Text Style
-  let selectedStyles = [];
-  const styleButtons = document.querySelectorAll('.style-btn');
-  
-  styleButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const style = btn.dataset.style;
-      if (selectedStyles.includes(style)) {
-        selectedStyles = selectedStyles.filter(s => s !== style);
-        btn.classList.remove('active');
-      } else {
-        selectedStyles.push(style);
-        btn.classList.add('active');
-      }
-    });
-  });
-  
-  // Text Alignment
-  let selectedAlign = 'left';
-  const alignButtons = document.querySelectorAll('.align-btn');
-  
-  alignButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      alignButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedAlign = btn.dataset.align;
-    });
-  });
-  
-  // Fetch fonts
-  let selectedFont = '';
-  const fontSelectBtn = document.getElementById('fontSelectBtn');
-  const fontDropdown = document.getElementById('fontDropdown');
-  const fontOptions = document.getElementById('fontOptions');
-  const selectedFontText = document.getElementById('selectedFontText');
-  
-  fontSelectBtn.addEventListener('click', () => {
-    fontDropdown.classList.toggle('hidden');
-  });
-  
-  document.addEventListener('click', (e) => {
-    if (!fontSelectBtn.contains(e.target) && !fontDropdown.contains(e.target)) {
-      fontDropdown.classList.add('hidden');
-    }
-  });
-  
-  fetch('https://bit-x-apis.vercel.app/fonts')
-    .then(res => res.json())
-    .then(data => {
-      selectedFont = data.fonts[0];
-      selectedFontText.textContent = selectedFont.replace(/\.TTF$/i, '');
-      fontOptions.innerHTML = '';
-      
-      data.fonts.forEach(font => {
-        const option = document.createElement('div');
-        option.className = 'dropdown-item';
-        
-        const previewImg = document.createElement('img');
-        previewImg.loading = 'lazy';
-        previewImg.alt = font;
-        
-        fetch(`https://bit-x-apis.vercel.app/textimg?q=fïl ,iaikhs&font=${encodeURIComponent(font)}&size=30&align=center&color=%23000000&s=`)
-          .then(res => res.json())
-          .then(previewData => {
-            if (previewData.status && previewData.image) {
-              previewImg.src = previewData.image;
-              previewImg.onerror = () => option.remove();
-            } else {
-              option.remove();
-            }
-          })
-          .catch(() => option.remove());
-        
-        const fontName = document.createElement('span');
-        fontName.textContent = font.replace(/\.TTF$/i, '');
-        
-        option.appendChild(previewImg);
-        option.appendChild(fontName);
-        
-        option.addEventListener('click', () => {
-          selectedFont = font;
-          selectedFontText.textContent = font.replace(/\.TTF$/i, '');
-          fontDropdown.classList.add('hidden');
-        });
-        
-        fontOptions.appendChild(option);
-      });
-    })
-    .catch(() => {
-      fontOptions.innerHTML = '<div style="text-align: center; color: #f87171; padding: 16px; font-size: 12px;">Error loading fonts</div>';
-    });
-  
-  // Generate Image
-  const generateBtn = document.getElementById('generateBtn');
-  generateBtn.addEventListener('click', async () => {
-    let text = document.getElementById('userText').value;
-    text = text.replace(/\r?\n/g, '\n');
-    
-    const font = selectedFont;
-    const size = fontSizeSlider.value;
-    const color = colorHexInput.value.replace('#', '');
-    const align = selectedAlign;
-    const bypassProcessing = document.getElementById('bypassProcessing').checked;
-    const loadingState = document.getElementById('loadingState');
-    const imageContainer = document.getElementById('imageContainer');
-    
-    if(!text) {
-      alert('Please enter some text');
-      return;
-    }
-    
-    if(!font) {
-      alert('Please select a font');
-      return;
-    }
-    
-    loadingState.classList.remove('hidden');
-    imageContainer.innerHTML = '';
-    
-    try {
-      let processedText = text;
-      
-      if (!bypassProcessing) {
-        const textResp = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(text)}&type=${currentType}`);
-        const textData = await textResp.json();
-        if(!textData.status) throw new Error('Error processing text');
-        processedText = textData.response;
-      }
-      
-      let styleValue = '';
-      if (selectedStyles.length > 0) {
-        const sortedStyles = selectedStyles.sort((a, b) => {
-          const order = { 'b': 0, 'i': 1, 'u': 2 };
-          return order[a] - order[b];
-        });
-        styleValue = sortedStyles.join('');
-      }
-      
-      const imgResp = await fetch(`https://bit-x-apis.vercel.app/textimg?q=${encodeURIComponent(processedText)}&font=${encodeURIComponent(font)}&size=${encodeURIComponent(size)}&align=${align}&color=%23${color}&s=${styleValue}`);
-      const imgData = await imgResp.json();
-      if(!imgData.status) throw new Error('Error generating image');
-      
-      loadingState.classList.add('hidden');
-      
-      imageContainer.innerHTML = `
-        <div class="image-result animate-fade-in">
-          <div class="image-wrapper">
-            <img src="${imgData.image}" alt="Generated">
-          </div>
-          <a href="${imgData.image}" download="sinhala-text.png" class="download-btn">
-            <i class="fas fa-download" style="margin-right: 6px;"></i>Download Image
-          </a>
-        </div>
-      `;
-    } catch(error) {
-      loadingState.classList.add('hidden');
-      alert(error.message);
-    }
-  });
+  modeToggle.addEventListener('click', toggleMode);
   
 });
 </script>
 </body>
+</html>
