@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - SINFIG</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+body.dark-mode {
+  background: #000000;
+}
+
+.sinhala {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Navbar */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  padding: 10px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+body.dark-mode nav {
+  background: #000000;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+nav > div {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+body.dark-mode .nav-title {
+  color: #ffffff;
+}
+
+.back-btn {
+  padding: 6px 12px;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  color: #000000;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+body.dark-mode .back-btn {
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  color: #ffffff;
+}
+
+.back-btn:hover {
+  background: #e5e5e5;
+}
+
+body.dark-mode .back-btn:hover {
+  background: #333333;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-toggle {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.lang-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.mode-toggle {
+  padding: 8px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+body.dark-mode .mode-toggle {
+  background: #1a1a1a;
+  border: 1px solid #333333;
+}
+
+.mode-toggle:hover {
+  background: #e5e5e5;
+}
+
+body.dark-mode .mode-toggle:hover {
+  background: #333333;
+}
+
+/* Main Content */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 16px 40px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.page-header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+body.dark-mode .page-header h1 {
+  color: #ffffff;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #666666;
+}
+
+body.dark-mode .page-header p {
+  color: #999999;
+}
+
+@media (min-width: 640px) {
+  .page-header h1 { font-size: 48px; }
+  .page-header p { font-size: 18px; }
+}
+
+.content-section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body.dark-mode .section-title {
+  color: #ffffff;
+}
+
+.section-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon i {
+  font-size: 18px;
+  color: white;
+}
+
+.section-content {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+body.dark-mode .section-content {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+}
+
+.section-content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333333;
+  margin-bottom: 16px;
+}
+
+body.dark-mode .section-content p {
+  color: #cccccc;
+}
+
+.section-content p:last-child {
+  margin-bottom: 0;
+}
+
+.steps-list {
+  margin-top: 16px;
+}
+
+.step-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+body.dark-mode .step-item {
+  background: #000000;
+  border: 1px solid #1a1a1a;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 6px;
+}
+
+body.dark-mode .step-content h4 {
+  color: #ffffff;
+}
+
+.step-content p {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+body.dark-mode .step-content p {
+  color: #999999;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (min-width: 640px) {
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.feature-item {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+body.dark-mode .feature-item {
+  background: #000000;
+  border: 1px solid #1a1a1a;
+}
+
+.feature-item i {
+  color: #3b82f6;
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+.feature-item span {
+  font-size: 14px;
+  color: #333333;
+  line-height: 1.5;
+}
+
+body.dark-mode .feature-item span {
+  color: #cccccc;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e5e5;
+  color: #999999;
+  font-size: 14px;
+}
+
+body.dark-mode .footer {
+  border-top: 1px solid #1a1a1a;
+  color: #666666;
+}
+
+.footer i.fa-heart {
+  color: #ef4444;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 640px) {
+  nav { padding: 10px 16px; }
+  .nav-title { font-size: 18px; }
+  .container { padding: 120px 24px 40px; }
+}
+
+@media (min-width: 1024px) {
+  nav { padding: 10px 24px; }
+}
+</style>
+</head>
+<body class="light-mode">
+
+<!-- Navbar -->
+<nav>
+  <div>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-icon">
+          <i class="fas fa-font text-white" style="font-size: 14px;"></i>
+        </div>
+        <h1 class="nav-title">SINFIG</h1>
+      </a>
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left" style="font-size: 11px;"></i>
+        <span id="backText">Back</span>
+      </a>
+    </div>
+    <div class="nav-right">
+      <button id="langToggle" class="lang-toggle">
+        <i class="fas fa-language" style="margin-right: 4px;"></i>
+        <span id="langText">සිංහල</span>
+      </button>
+      <button id="modeToggle" class="mode-toggle">
+        <i class="fas fa-moon" id="modeIcon" style="font-size: 14px; color: #374151;"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  
+  <!-- English Content -->
+  <div id="englishContent">
+    <!-- Page Header -->
+    <div class="page-header animate-fade-in">
+      <h1>About SINFIG</h1>
+      <p>Learn how to use our Sinhala text tools</p>
+    </div>
+
+    <!-- Text Converter Section -->
+    <div class="content-section animate-fade-in">
+      <h2 class="section-title">
+        <div class="section-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        Text Converter
+      </h2>
+      <div class="section-content">
+        <p>The Text Converter allows you to convert Sinhala text between different formats in real-time. Perfect for converting legacy fonts to Unicode or typing in Singlish.</p>
+        
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Enter Your Text</h4>
+              <p>Type or paste your text in the left input area. The text can be in Unicode, Legacy format, or Singlish.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Select Conversion Type</h4>
+              <p>Choose from 12 conversion types including Unicode to Legacy, Legacy to Unicode, or Singlish to Unicode.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Get Instant Results</h4>
+              <p>Your converted text appears on the right side in real-time. Click the copy button to use it anywhere.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fas fa-bolt"></i>
+            <span>Real-time conversion as you type</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-list"></i>
+            <span>12 different conversion types</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-copy"></i>
+            <span>One-click copy to clipboard</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Works on all devices</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Font Generator Section -->
+    <div class="content-section animate-fade-in">
+      <h2 class="section-title">
+        <div class="section-icon">
+          <i class="fas fa-font"></i>
+        </div>
+        Font Generator
+      </h2>
+      <div class="section-content">
+        <p>Create beautiful Sinhala text images with custom fonts, colors, and styles. Perfect for social media posts, designs, and graphics.</p>
+        
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Enter Your Text</h4>
+              <p>Type your text in the input area. Use the type toggle (1-4) to select text processing method.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Choose Font & Styling</h4>
+              <p>Select from multiple Sinhala fonts, adjust size, color, text style (bold, italic, underline), and alignment.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Generate & Download</h4>
+              <p>Click "Generate Image" to create your custom text image. Preview it and download for your use.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fas fa-palette"></i>
+            <span>Multiple Sinhala font options</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-sliders-h"></i>
+            <span>Customizable size and color</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-text-height"></i>
+            <span>Text styling (bold, italic, underline)</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-download"></i>
+            <span>Download as PNG image</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sinhala Content -->
+  <div id="sinhalaContent" class="hidden sinhala">
+    <!-- Page Header -->
+    <div class="page-header animate-fade-in">
+      <h1>SINFIG ගැන</h1>
+      <p>අපගේ සිංහල පෙළ මෙවලම් භාවිතා කරන ආකාරය ඉගෙන ගන්න</p>
+    </div>
+
+    <!-- Text Converter Section -->
+    <div class="content-section animate-fade-in">
+      <h2 class="section-title">
+        <div class="section-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        පෙළ පරිවර්තකය
+      </h2>
+      <div class="section-content">
+        <p>පෙළ පරිවර්තකය ඔබට සිංහල පෙළ විවිධ ආකෘති අතර තත්‍ය කාලීනව පරිවර්තනය කිරීමට ඉඩ සලසයි. උරුම අකුරු යුනිකෝඩ් බවට හෝ සිංග්ලිෂ් යුනිකෝඩ් බවට පරිවර්තනය කිරීමට පරිපූර්ණයි.</p>
+        
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>ඔබේ පෙළ ඇතුලත් කරන්න</h4>
+              <p>වම් පැත්තේ ඇති ඉන්පුට් ප්‍රදේශයේ ඔබේ පෙළ ටයිප් කරන්න හෝ අලවන්න. පෙළ යුනිකෝඩ්, උරුම ආකෘතිය හෝ සිංග්ලිෂ් විය හැකිය.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>පරිවර්තන වර්ගය තෝරන්න</h4>
+              <p>යුනිකෝඩ් සිට උරුම, උරුම සිට යුනිකෝඩ් හෝ සිංග්ලිෂ් සිට යුනිකෝඩ් ඇතුළු පරිවර්තන වර්ග 12 න් තෝරන්න.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>ක්ෂණික ප්‍රතිඵල ලබා ගන්න</h4>
+              <p>ඔබේ පරිවර්තිත පෙළ දකුණු පැත්තේ තත්‍ය කාලීනව දිස්වේ. එය ඕනෑම තැනක භාවිතා කිරීමට පිටපත් බොත්තම ක්ලික් කරන්න.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fas fa-bolt"></i>
+            <span>ඔබ ටයිප් කරන විට තත්‍ය කාලීන පරිවර්තනය</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-list"></i>
+            <span>විවිධ පරිවර්තන වර්ග 12 ක්</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-copy"></i>
+            <span>එක් ක්ලික් කිරීමකින් පිටපත් කරන්න</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>සියලුම උපාංගවල ක්‍රියා කරයි</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Font Generator Section -->
+    <div class="content-section animate-fade-in">
+      <h2 class="section-title">
+        <div class="section-icon">
+          <i class="fas fa-font"></i>
+        </div>
+        අකුරු උත්පාදකය
+      </h2>
+      <div class="section-content">
+        <p>අභිරුචි අකුරු, වර්ණ සහ විලාසයන් සමඟ ලස්සන සිංහල පෙළ රූප නිර්මාණය කරන්න. සමාජ මාධ්‍ය පළ කිරීම්, නිර්මාණ සහ ග්‍රැෆික්ස් සඳහා පරිපූර්ණයි.</p>
+        
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>ඔබේ පෙළ ඇතුලත් කරන්න</h4>
+              <p>ඉන්පුට් ප්‍රදේශයේ ඔබේ පෙළ ටයිප් කරන්න. පෙළ සැකසුම් ක්‍රමය තෝරා ගැනීමට වර්ගය ටොගල් (1-4) භාවිතා කරන්න.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>අකුරු සහ විලාසය තෝරන්න</h4>
+              <p>බහු සිංහල අකුරු වලින් තෝරන්න, ප්‍රමාණය, වර්ණය, පෙළ විලාසය (තද, ඇල, යටි ඉරි) සහ පෙළගැස්ම සකස් කරන්න.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>උත්පාදනය කර බාගන්න</h4>
+              <p>ඔබේ අභිරුචි පෙළ රූපය නිර්මාණය කිරීමට "Generate Image" ක්ලික් කරන්න. එය පෙරදසුන් කර ඔබේ භාවිතය සඳහා බාගන්න.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fas fa-palette"></i>
+            <span>බහු සිංහල අකුරු විකල්ප</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-sliders-h"></i>
+            <span>අභිරුචිකරණය කළ හැකි ප්‍රමාණය සහ වර්ණය</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-text-height"></i>
+            <span>පෙළ විලාසය (තද, ඇල, යටි ඉරි)</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-download"></i>
+            <span>PNG රූපයක් ලෙස බාගන්න</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><span id="footerText">Made with</span> <i class="fas fa-heart"></i> <span id="footerText2">for Sinhala Typography By Nethindu Thaminda</span> 🥰</p>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Dark Mode Toggle
+  let isDarkMode = false;
+  const modeToggle = document.getElementById('modeToggle');
+  const modeIcon = document.getElementById('modeIcon');
+
+  function toggleMode() {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    document.body.classList.toggle('light-mode', !isDarkMode);
+    modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+    modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
+  }
+
+  modeToggle.addEventListener('click', toggleMode);
+
+  // Language Toggle
+  let isEnglish = true;
+  const langToggle = document.getElementById('langToggle');
+  const langText = document.getElementById('langText');
+  const englishContent = document.getElementById('englishContent');
+  const sinhalaContent = document.getElementById('sinhalaContent');
+  const backText = document.getElementById('backText');
+  const footerText = document.getElementById('footerText');
+  const footerText2 = document.getElementById('footerText2');
+
+  function toggleLanguage() {
+    isEnglish = !isEnglish;
+    
+    if (isEnglish) {
+      langText.textContent = 'සිංහල';
+      englishContent.classList.remove('hidden');
+      sinhalaContent.classList.add('hidden');
+      backText.textContent = 'Back';
+      footerText.textContent = 'Made with';
+      footerText2.textContent = 'for Sinhala Typography By Nethindu Thaminda';
+    } else {
+      langText.textContent = 'English';
+      englishContent.classList.add('hidden');
+      sinhalaContent.classList.remove('hidden');
+      backText.textContent = 'ආපසු';
+      footerText.textContent = 'සිංහල අකුරු සඳහා';
+      footerText2.textContent = 'නෙතින්දු තමින්ද විසින් නිර්මාණය කරන ලදී';
+    }
+  }
+
+  langToggle.addEventListener('click', toggleLanguage);
+  
+});
+</script>
+</body>
+</html>
