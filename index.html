@@ -281,20 +281,45 @@ body.dark-mode .footer {
 </head>
 <body class="light-mode">
 
-<!-- Navbar -->
 <nav>
   <div>
     <div class="nav-logo">
       <div class="nav-icon">
         <i class="fas fa-font text-white" style="font-size: 14px;"></i>
       </div>
-      <h1 class="nav-title">SINFIG</h1>
+      <h1 class="nav-title">Sinhala Generator</h1>
     </div>
-    <button id="modeToggle" class="mode-toggle">
-      <i class="fas fa-moon" id="modeIcon" style="font-size: 14px; color: #374151;"></i>
-    </button>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <!-- About button -->
+      <a href="about.html"
+         title="About"
+         style="
+           width:32px;
+           height:32px;
+           border-radius:8px;
+           background:#1a1a1a;
+           border:1px solid #333333;
+           color:#ffffff;
+           text-decoration:none;
+           font-weight:700;
+           font-size:16px;
+           display:flex;
+           align-items:center;
+           justify-content:center;
+         ">
+        ?
+      </a>
+
+      <!-- Mode toggle -->
+      <button id="modeToggle" class="mode-toggle">
+        <i class="fas fa-sun text-yellow-300" id="modeIcon"
+           style="font-size: 14px; color: #fbbf24;"></i>
+      </button>
+    </div>
   </div>
 </nav>
+
 
 <!-- Main Content -->
 <div class="container">
