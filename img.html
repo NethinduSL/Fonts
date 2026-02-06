@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sinhala Font Generator</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -19,6 +19,17 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   transition: background 0.3s ease;
+  position: relative;
+  width: 100%;
+}
+
+html {
+  background: #000000;
+  min-height: 100%;
+}
+
+html.light-mode {
+  background: #ffffff;
 }
 
 @media (min-width: 768px) {
@@ -30,6 +41,55 @@ body {
 
 body.light-mode {
   background: #ffffff;
+}
+
+/* Background Design */
+.bg-design {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-circle {
+  position: absolute;
+  top: -5%;
+  left: -25%;
+  width: 50%;
+  height: 110%;
+  background: #e0f2fe;
+  border-radius: 50%;
+}
+
+.bg-text {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  font-size: 180px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  opacity: 1;
+  user-select: none;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .bg-text {
+    font-size: 100px;
+    left: -5%;
+  }
+  .bg-circle {
+    width: 70%;
+    left: -35%;
+  }
 }
 
 .gradient-btn {
@@ -119,12 +179,13 @@ nav {
   top: 0;
   z-index: 50;
   padding: 10px 12px;
-  background: #000000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid #1a1a1a;
 }
 
 body.light-mode nav {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -189,6 +250,8 @@ body.light-mode .mode-toggle:hover {
   max-width: 1280px;
   margin: 0 auto;
   padding: 80px 12px 24px;
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -713,6 +776,13 @@ body.light-mode .footer {
 </style>
 </head>
 <body class="light-mode">
+
+<!-- Background Design -->
+<div class="bg-design">
+  <div class="bg-circle"></div>
+  <div class="bg-text">SINFIG</div>
+</div>
+
 <nav>
   <div>
     <div class="nav-logo">
@@ -917,6 +987,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function toggleMode() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('light-mode', !isDarkMode);
+    document.documentElement.classList.toggle('dark-mode', isDarkMode);
     modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
     modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
   }
@@ -1101,24 +1172,42 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       let processedText = text;
       
-      // Check if font name ends with UNI - if so, bypass text processing
-      if (!bypassProcessing && !isUniFont(font)) {
-        const currentType = textTypes[currentTypeIndex].type;
-        const secondType = textTypes[currentTypeIndex].secondType;
-        
-        // First processing with the primary type
+      // Determine if we should process text based on font and text type
+      const currentType = textTypes[currentTypeIndex].type;
+      const secondType = textTypes[currentTypeIndex].secondType;
+      const isSinglish = secondType !== null; // Singlish T1 or T2 have secondType
+      const fontIsUni = isUniFont(font);
+      
+      // Skip all processing if:
+      // 1. Bypass is enabled, OR
+      // 2. Font is UNI AND type is Unicode (1, 2, or 3)
+      if (bypassProcessing || (fontIsUni && !isSinglish)) {
+        // Use text as-is, no processing
+        processedText = text;
+      }
+      // For Unicode types with non-UNI fonts, do single processing
+      else if (!isSinglish && !fontIsUni) {
+        const textResp = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(text)}&type=${currentType}`);
+        const textData = await textResp.json();
+        if(!textData.status) throw new Error('Error processing text');
+        processedText = textData.response;
+      }
+      // For Singlish types
+      else if (isSinglish) {
+        // First processing with the primary type (10)
         const textResp = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(text)}&type=${currentType}`);
         const textData = await textResp.json();
         if(!textData.status) throw new Error('Error processing text');
         processedText = textData.response;
         
-        // If there's a second type (Singlish T1 or T2), process again
-        if (secondType !== null) {
+        // If font is NOT UNI, do second processing with secondType (1 or 2)
+        if (!fontIsUni) {
           const textResp2 = await fetch(`https://bit-x-apis.vercel.app/text?q=${encodeURIComponent(processedText)}&type=${secondType}`);
           const textData2 = await textResp2.json();
           if(!textData2.status) throw new Error('Error processing text (second pass)');
           processedText = textData2.response;
         }
+        // If font IS UNI, skip second processing - use result from first API only
       }
       
       let styleValue = '';
