@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SINFIG - Sinhala Text Tools</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -19,9 +19,20 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   transition: background 0.3s ease;
+  position: relative;
+  width: 100%;
 }
 
 body.dark-mode {
+  background: #000000;
+}
+
+html {
+  background: #ffffff;
+  min-height: 100%;
+}
+
+html.dark-mode {
   background: #000000;
 }
 
@@ -34,6 +45,55 @@ body.dark-mode {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Background Design */
+.bg-design {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-circle {
+  position: absolute;
+  top: -5%;
+  left: -25%;
+  width: 50%;
+  height: 110%;
+  background: #e0f2fe;
+  border-radius: 50%;
+}
+
+.bg-text {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  font-size: 180px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  opacity: 1;
+  user-select: none;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .bg-text {
+    font-size: 100px;
+    left: -5%;
+  }
+  .bg-circle {
+    width: 70%;
+    left: -35%;
+  }
+}
+
 /* Navbar */
 nav {
   position: fixed;
@@ -41,12 +101,13 @@ nav {
   top: 0;
   z-index: 50;
   padding: 10px 12px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid #e5e5e5;
 }
 
 body.dark-mode nav {
-  background: #000000;
+  background: rgba(0, 0, 0, 0.8);
   border-bottom: 1px solid #1a1a1a;
 }
 
@@ -116,6 +177,8 @@ body.dark-mode .mode-toggle:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero {
@@ -281,45 +344,26 @@ body.dark-mode .footer {
 </head>
 <body class="light-mode">
 
+<!-- Background Design -->
+<div class="bg-design">
+  <div class="bg-circle"></div>
+  <div class="bg-text">SINFIG</div>
+</div>
+
+<!-- Navbar -->
 <nav>
   <div>
     <div class="nav-logo">
       <div class="nav-icon">
         <i class="fas fa-font text-white" style="font-size: 14px;"></i>
       </div>
-      <h1 class="nav-title">Sinhala Generator</h1>
+      <h1 class="nav-title">SINFIG</h1>
     </div>
-
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <!-- About button -->
-      <a href="about.html"
-         title="About"
-         style="
-           width:32px;
-           height:32px;
-           border-radius:8px;
-           background:#1a1a1a;
-           border:1px solid #333333;
-           color:#ffffff;
-           text-decoration:none;
-           font-weight:700;
-           font-size:16px;
-           display:flex;
-           align-items:center;
-           justify-content:center;
-         ">
-        ?
-      </a>
-
-      <!-- Mode toggle -->
-      <button id="modeToggle" class="mode-toggle">
-        <i class="fas fa-sun text-yellow-300" id="modeIcon"
-           style="font-size: 14px; color: #fbbf24;"></i>
-      </button>
-    </div>
+    <button id="modeToggle" class="mode-toggle">
+      <i class="fas fa-moon" id="modeIcon" style="font-size: 14px; color: #374151;"></i>
+    </button>
   </div>
 </nav>
-
 
 <!-- Main Content -->
 <div class="container">
@@ -399,6 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('dark-mode', isDarkMode);
     document.body.classList.toggle('light-mode', !isDarkMode);
+    document.documentElement.classList.toggle('dark-mode', isDarkMode);
     modeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
     modeIcon.style.color = isDarkMode ? '#fbbf24' : '#374151';
   }
