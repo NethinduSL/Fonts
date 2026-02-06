@@ -397,6 +397,38 @@ body.dark-mode .footer {
     <h1>SINFIG</h1>
     <p>Professional Sinhala text tools for conversion and font generation. Choose your tool below.</p>
   </div>
+  <center>
+<h2 id="visit-counter">
+  Loading visits...
+</h2>
+</center>
+<script>
+  // Replace this with your URL
+  const myUrl = 'https://sinfig.vercel.app/';
+
+  async function loadVisits() {
+    try {
+      const res = await fetch(`https://bit-x-apis.vercel.app/visits?url=${encodeURIComponent(myUrl)}`);
+      const data = await res.json();
+
+      if (data.error) {
+        document.getElementById('visit-counter').innerHTML = 'Error loading visits';
+        return;
+      }
+
+      // Display daily visits bold, monthly visits smaller
+      document.getElementById('visit-counter').innerHTML = `
+        <b>Daily Visits: ${data.dailyVisits}</b>
+        <small> | Monthly: ${data.monthlyVisits}</small>
+      `;
+    } catch (err) {
+      document.getElementById('visit-counter').innerHTML = 'Error fetching visits';
+      console.error(err);
+    }
+  }
+
+  loadVisits();
+</script>
 
   <!-- Cards Grid -->
   <div class="cards-grid">
