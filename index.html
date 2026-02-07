@@ -417,10 +417,8 @@ body.dark-mode .footer {
 
   <!-- Visit Counter -->
   <div class="visit-counter-wrapper">
-    <p id="visit-counter" class="visit-counter">
-      Loading visits...
-    </p>
-     <a href='https://www.free-counters.org/'>https://www.Free-Counters.org</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=f2e5f647fccb7cc4c5ed0292e7d2857e288af4ed'></script>
+  
+<script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=f2e5f647fccb7cc4c5ed0292e7d2857e288af4ed'></script>
 <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1498136/t/3"></script>
   </div>
 
@@ -483,31 +481,6 @@ body.dark-mode .footer {
 </div>
 
 <script>
-  // Visit Counter
-  const myUrl = 'https://sinfig.vercel.app/';
-
-  async function loadVisits() {
-    try {
-      const res = await fetch(`https://bit-x-apis.vercel.app/visits?url=${encodeURIComponent(myUrl)}`);
-      const data = await res.json();
-
-      if (data.error) {
-        document.getElementById('visit-counter').innerHTML = 'Error loading visits';
-        return;
-      }
-
-      // Display daily visits bold, monthly visits with reduced opacity
-      document.getElementById('visit-counter').innerHTML = `
-        <span style="font-weight: 700;">Daily: ${data.dailyVisits}</span>
-        <span style="font-weight: 400; opacity: 0.6;"> | Monthly: ${data.monthlyVisits}</span>
-      `;
-    } catch (err) {
-      document.getElementById('visit-counter').innerHTML = 'Error fetching visits';
-      console.error(err);
-    }
-  }
-
-  loadVisits();
 
   // Dark Mode Toggle
   document.addEventListener('DOMContentLoaded', function() {
