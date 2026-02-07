@@ -417,7 +417,12 @@ body.dark-mode .footer {
 
   <!-- Visit Counter -->
   
+  <div class="visit-counter-wrapper animate-fade-in">
+  <div class="visit-counter">
+   <strong><span id="visitCount">0</span></strong> visits
   </div>
+</div>
+
 
   <!-- Cards Grid -->
   <div class="cards-grid">
@@ -478,6 +483,14 @@ body.dark-mode .footer {
 </div>
 
 <script>
+  fetch('https://api.countapi.xyz/hit/sinfig.vercel.app/home')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitCount').innerText = data.value;
+    })
+    .catch(() => {
+      document.getElementById('visitCount').innerText = '—';
+    });
 
   // Dark Mode Toggle
   document.addEventListener('DOMContentLoaded', function() {
